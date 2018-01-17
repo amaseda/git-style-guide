@@ -5,25 +5,6 @@ Kernel*](https://kernel.org/doc/html/latest/process/submitting-patches.html),
 the [git man pages](http://git-scm.com/doc) and various practices popular
 among the community.
 
-Translations are available in the following languages:
-
-* [Chinese (Simplified)](https://github.com/aseaday/git-style-guide)
-* [Chinese (Traditional)](https://github.com/JuanitoFatas/git-style-guide)
-* [French](https://github.com/pierreroth64/git-style-guide)
-* [German](https://github.com/runjak/git-style-guide)
-* [Greek](https://github.com/grigoria/git-style-guide)
-* [Japanese](https://github.com/objectx/git-style-guide)
-* [Korean](https://github.com/ikaruce/git-style-guide)
-* [Portuguese](https://github.com/guylhermetabosa/git-style-guide)
-* [Russian](https://github.com/alik0211/git-style-guide)
-* [Spanish](https://github.com/jeko2000/git-style-guide)
-* [Thai](https://github.com/zondezatera/git-style-guide)
-* [Turkish](https://github.com/CnytSntrk/git-style-guide)
-* [Ukrainian](https://github.com/denysdovhan/git-style-guide)
-
-If you feel like contributing, please do so! Fork the project and open a pull
-request.
-
 # Table of contents
 
 1. [Branches](#branches)
@@ -52,6 +33,8 @@ request.
   $ git checkout -b issue-15
   ```
 
+  > TODO: Can replace this part with something about referencing Jira IDs
+
 * Use *hyphens* to separate words.
 
 * When several people are working on the *same* feature, it might be convenient
@@ -65,12 +48,12 @@ request.
   ```
 
   Merge at will the personal branches to the team-wide branch (see ["Merging"](#merging)).
-  Eventually, the team-wide branch will be merged to "master".
+  Eventually, the team-wide branch will be merged to `master`.
 
 * Delete your branch from the upstream repository after it's merged, unless
   there is a specific reason not to.
 
-  Tip: Use the following command while being on "master", to list merged
+  Tip: Use the following command while being on `master`, to list merged
   branches:
 
   ```shell
@@ -130,6 +113,8 @@ holds true that you should apply all of the above *before* pushing it.
   fixed ActiveModel::Errors deprecation messages failing when AR was used outside of Rails.
   ```
 
+  > TODO: What are our thoughts on tense usage in commit messages -- past and/or present?
+
 * After that should come a blank line followed by a more thorough
   description. It should be wrapped to *72 characters* and explain *why*
   the change is needed, *how* it addresses the issue and what *side-effects*
@@ -153,19 +138,20 @@ holds true that you should apply all of the above *before* pushing it.
 
   - Bullet points are okay, too
 
-  - Use a hyphen or an asterisk for the bullet,
-    followed by a single space, with blank lines in
-    between
+  - Use a hyphen for the bullet, followed by a single space, with blank lines
+  in between
 
-  The pointers to your related resources can serve as a footer 
-  for your commit message. Here is an example that is referencing 
+  The pointers to your related resources can serve as a footer
+  for your commit message. Here is an example that is referencing
   issues in a bug tracker:
-  
+
   Resolves: #56, #78
   See also: #12, #34
 
   Source http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
   ```
+
+  > TODO: Can also update this pointers section to reference Jira IDs
 
   Ultimately, when writing a commit message, think about what you would need
   to know if you run across the commit in a year from now.
@@ -189,6 +175,8 @@ holds true that you should apply all of the above *before* pushing it.
 
 ## Merging
 
+### Rewriting History
+
 * **Do not rewrite published history.** The repository's history is valuable in
   its own right and it is very important to be able to tell *what actually
   happened*. Altering published history is a common source of problems for
@@ -200,30 +188,37 @@ holds true that you should apply all of the above *before* pushing it.
   * You are the only one working on the branch and it is not being reviewed.
 
   * You want to tidy up your branch (eg. squash commits) and/or rebase it onto
-    the "master" in order to merge it later.
+    the `master` in order to merge it later.
 
-  That said, *never rewrite the history of the "master" branch* or any other
+  That said, *never rewrite the history of the `master` branch* or any other
   special branches (ie. used by production or CI servers).
 
-* Keep the history *clean* and *simple*. *Just before you merge* your branch:
+### Merging into `develop`
 
-    1. Make sure it conforms to the style guide and perform any needed actions
-       if it doesn't (squash/reorder commits, reword messages etc.)
+1. Make sure your branch conforms to the style guide and perform any needed actions
+   if it doesn't (squash/reorder commits, reword messages etc.)
 
-    2. Rebase it onto the branch it's going to be merged to:
+2. Make sure you have the most recent changes in your local `develop`
+   branch. Checkout to your feature branch and rebase it onto `develop`:
 
-      ```shell
-      [my-branch] $ git fetch
-      [my-branch] $ git rebase origin/master
-      # then merge
-      ```
+  ```shell
+  [develop] $ git pull origin develop
+  [develop] $ git checkout my-branch
+  [my-branch] $ git rebase develop
+  # then merge
+  ```
 
-      This results in a branch that can be applied directly to the end of the
-      "master" branch and results in a very simple history.
+3. Push your branch to Github and open a pull request between your branch and
+   `develop`. Once the PR is reviewed and approved, **squash and merge** your branch into `develop`.
 
-      *(Note: This strategy is better suited for projects with short-running
-      branches. Otherwise it might be better to occassionally merge the
-      "master" branch instead of rebasing onto it.)*
+### Merging `develop` into `master`
+
+Follow the same instructions as merging into `develop`, with the following exceptions...
+
+  - Merge `develop` into `master` using the "Merge Pull Request" option.
+    **DO NOT** select the "Squash and Merge" option.
+
+## Misc.
 
 * If your branch includes more than one commit, do not merge with a
   fast-forward:
@@ -235,14 +230,6 @@ holds true that you should apply all of the above *before* pushing it.
   # bad
   $ git merge my-branch
   ```
-
-## Misc.
-
-* There are various workflows and each one has its strengths and weaknesses.
-  Whether a workflow fits your case, depends on the team, the project and your
-  development procedures.
-
-  That said, it is important to actually *choose* a workflow and stick with it.
 
 * *Be consistent.* This is related to the workflow but also expands to things
   like commit messages, branch names and tags. Having a consistent style
@@ -262,6 +249,10 @@ holds true that you should apply all of the above *before* pushing it.
   * [`git-gc(1)`](http://git-scm.com/docs/git-gc)
   * [`git-prune(1)`](http://git-scm.com/docs/git-prune)
   * [`git-fsck(1)`](http://git-scm.com/docs/git-fsck)
+
+# Versioning
+
+> TODO: Come up with official versioning policy
 
 # License
 
