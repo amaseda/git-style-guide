@@ -218,6 +218,9 @@ Follow the same instructions as merging into `develop`, with the following excep
   - Merge `develop` into `master` using the "Merge Pull Request" option.
     **DO NOT** select the "Squash and Merge" option.
 
+> TODO: With our setup, should we be rebasing `master` into `develop` before
+  every merge?
+
 ## Misc.
 
 * If your branch includes more than one commit, do not merge with a
