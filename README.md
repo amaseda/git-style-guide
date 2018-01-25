@@ -207,6 +207,7 @@ holds true that you should apply all of the above *before* pushing it.
   [develop] $ git pull origin develop
   [develop] $ git checkout my-branch
   [my-branch] $ git rebase develop
+  [my-branch] $ git push --force origin my-branch
   # then merge
   ```
 
