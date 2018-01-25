@@ -15,6 +15,8 @@ among the community.
 
 ## Branches
 
+* Never commit directly to `master` or `develop`. New code should always be made in a separate branch (e.g., feature, hotfix)
+
 * Choose *short* and *descriptive* names:
 
   ```shell
