@@ -27,16 +27,6 @@ among the community.
   $ git checkout -b login_fix
   ```
 
-* Identifiers from corresponding tickets in an external service (eg. a GitHub
-  issue) are also good candidates for use in branch names. For example:
-
-  ```shell
-  # GitHub issue #15
-  $ git checkout -b issue-15
-  ```
-
-  > TODO: Can replace this part with something about referencing Jira IDs
-
 * Use *hyphens* to separate words.
 
 * When several people are working on the *same* feature, it might be convenient
@@ -115,8 +105,6 @@ holds true that you should apply all of the above *before* pushing it.
   fixed ActiveModel::Errors deprecation messages failing when AR was used outside of Rails.
   ```
 
-  > TODO: What are our thoughts on tense usage in commit messages -- past and/or present?
-
 * After that should come a blank line followed by a more thorough
   description. It should be wrapped to *72 characters* and explain *why*
   the change is needed, *how* it addresses the issue and what *side-effects*
@@ -145,15 +133,13 @@ holds true that you should apply all of the above *before* pushing it.
 
   The pointers to your related resources can serve as a footer
   for your commit message. Here is an example that is referencing
-  issues in a bug tracker:
+  Jira issues:
 
-  Resolves: #56, #78
-  See also: #12, #34
+  Resolves: WEB-123, WEB-234
+  See also: WEB-345, WEB-456
 
   Source http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
   ```
-
-  > TODO: Can also update this pointers section to reference Jira IDs
 
   Ultimately, when writing a commit message, think about what you would need
   to know if you run across the commit in a year from now.
@@ -254,10 +240,6 @@ Follow the same instructions as merging into `develop`, with the following excep
   * [`git-gc(1)`](http://git-scm.com/docs/git-gc)
   * [`git-prune(1)`](http://git-scm.com/docs/git-prune)
   * [`git-fsck(1)`](http://git-scm.com/docs/git-fsck)
-
-# Versioning
-
-> TODO: Come up with official versioning policy
 
 # License
 
