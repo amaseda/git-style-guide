@@ -40,15 +40,15 @@ $ git checkout -b login_fix
   tense. It should not end with a period since it is effectively the commit
   *title*:
 
-  ```shell
-  # good - imperative present tense, capitalized, fewer than 50 characters
-  Mark huge records as obsolete when clearing hinting faults
+    ```shell
+    # good - imperative present tense, capitalized, fewer than 50 characters
+    Mark huge records as obsolete when clearing hinting faults
 
-  # bad
-  fixed ActiveModel::Errors deprecation messages failing when AR was used outside of Rails.
-  ```
+    # bad
+    fixed ActiveModel::Errors deprecation messages failing when AR was used outside of Rails.
+    ```
 
-  > [One reason for imperative present tense.](https://www.danclarke.com/git-tense)
+    > [One reason for imperative present tense.](https://www.danclarke.com/git-tense)
 
 * After that should come a blank line followed by a more thorough
   description. It should be wrapped to *72 characters* and explain *why*
@@ -58,33 +58,33 @@ $ git checkout -b login_fix
   It should also provide any pointers to related resources (eg. link to the
   corresponding issue in a bug tracker):
 
-  ```text
-  Short (50 chars or fewer) summary of changes
+    ```text
+    Short (50 chars or fewer) summary of changes
 
-  More detailed explanatory text, if necessary. Wrap it to
-  72 characters. In some contexts, the first
-  line is treated as the subject of an email and the rest of
-  the text as the body.  The blank line separating the
-  summary from the body is critical (unless you omit the body
-  entirely); tools like rebase can get confused if you run
-  the two together.
+    More detailed explanatory text, if necessary. Wrap it to
+    72 characters. In some contexts, the first
+    line is treated as the subject of an email and the rest of
+    the text as the body.  The blank line separating the
+    summary from the body is critical (unless you omit the body
+    entirely); tools like rebase can get confused if you run
+    the two together.
 
-  Further paragraphs come after blank lines.
+    Further paragraphs come after blank lines.
 
-  - Bullet points are okay, too
+    - Bullet points are okay, too
 
-  - Use a hyphen for the bullet, followed by a single space, with blank lines
-  in between
+    - Use a hyphen for the bullet, followed by a single space, with blank lines
+    in between
 
-  The pointers to your related resources can serve as a footer
-  for your commit message. Here is an example that is referencing
-  issues in a bug tracker:
+    The pointers to your related resources can serve as a footer
+    for your commit message. Here is an example that is referencing
+    issues in a bug tracker:
 
-  Resolves: WEB-4, WEB-19
-  See also: WEB-66, WEB-89
+    Resolves: WEB-4, WEB-19
+    See also: WEB-66, WEB-89
 
-  Source http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
-  ```
+    Source http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+    ```
 
   Ultimately, when writing a commit message, think about what you would need
   to know if you run across the commit in a year from now.
@@ -97,13 +97,13 @@ $ git checkout -b login_fix
 2. Make sure you have the most recent changes in your local `develop`
    branch. Checkout to your feature branch and rebase it onto `develop`:
 
-  ```shell
-  [develop] $ git pull origin develop
-  [develop] $ git checkout my-branch
-  [my-branch] $ git rebase develop
-  [my-branch] $ git push --force origin my-branch
-  # then merge
-  ```
+    ```shell
+    [develop] $ git pull origin develop
+    [develop] $ git checkout my-branch
+    [my-branch] $ git rebase develop
+    [my-branch] $ git push --force origin my-branch
+    # then merge
+    ```
 
 3. Push your branch to Github and open a pull request between your branch and
    `develop`. Once the PR is reviewed and approved, **squash and merge** your branch into `develop`.
