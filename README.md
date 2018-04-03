@@ -7,11 +7,125 @@ among the community.
 
 # Table of contents
 
+0. [tl;dr](#tldr)
 1. [Branches](#branches)
 2. [Commits](#commits)
   1. [Messages](#messages)
 3. [Merging](#merging)
 4. [Misc.](#misc)
+
+## tl;dr
+
+### Branches
+
+* Use short and descriptive names for branches:
+
+```shell
+# good
+$ git checkout -b oauth-migration
+
+# bad - too vague
+$ git checkout -b login_fix
+```
+
+### Commits
+
+* Each commit should be a single *logical change*. Don't make several
+  *logical changes* in one commit. For example, if a patch fixes a bug and
+  optimizes the performance of a feature, split it into two separate commits.
+
+* The summary line (ie. the first line of the message) should be
+  *descriptive* yet *succinct*. Ideally, it should be no longer than
+  *50 characters*. It should be capitalized and written in imperative present
+  tense. It should not end with a period since it is effectively the commit
+  *title*:
+
+  ```shell
+  # good - imperative present tense, capitalized, fewer than 50 characters
+  Mark huge records as obsolete when clearing hinting faults
+
+  # bad
+  fixed ActiveModel::Errors deprecation messages failing when AR was used outside of Rails.
+  ```
+
+  > [One reason for imperative present tense.](https://www.danclarke.com/git-tense)
+
+* After that should come a blank line followed by a more thorough
+  description. It should be wrapped to *72 characters* and explain *why*
+  the change is needed, *how* it addresses the issue and what *side-effects*
+  it might have.
+
+  It should also provide any pointers to related resources (eg. link to the
+  corresponding issue in a bug tracker):
+
+  ```text
+  Short (50 chars or fewer) summary of changes
+
+  More detailed explanatory text, if necessary. Wrap it to
+  72 characters. In some contexts, the first
+  line is treated as the subject of an email and the rest of
+  the text as the body.  The blank line separating the
+  summary from the body is critical (unless you omit the body
+  entirely); tools like rebase can get confused if you run
+  the two together.
+
+  Further paragraphs come after blank lines.
+
+  - Bullet points are okay, too
+
+  - Use a hyphen for the bullet, followed by a single space, with blank lines
+  in between
+
+  The pointers to your related resources can serve as a footer
+  for your commit message. Here is an example that is referencing
+  issues in a bug tracker:
+
+  Resolves: WEB-4, WEB-19
+  See also: WEB-66, WEB-89
+
+  Source http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+  ```
+
+  Ultimately, when writing a commit message, think about what you would need
+  to know if you run across the commit in a year from now.
+
+### Merging into `develop`
+
+1. Make sure your branch conforms to the style guide and perform any needed actions
+   if it doesn't (squash/reorder commits, reword messages etc.)
+
+2. Make sure you have the most recent changes in your local `develop`
+   branch. Checkout to your feature branch and rebase it onto `develop`:
+
+  ```shell
+  [develop] $ git pull origin develop
+  [develop] $ git checkout my-branch
+  [my-branch] $ git rebase develop
+  [my-branch] $ git push --force origin my-branch
+  # then merge
+  ```
+
+3. Push your branch to Github and open a pull request between your branch and
+   `develop`. Once the PR is reviewed and approved, **squash and merge** your branch into `develop`.
+
+### Merging `develop` into `master`
+
+Follow the same instructions as merging into `develop`, with the following exceptions...
+
+- Merge `develop` into `master` using the "Merge Pull Request" option.
+ **DO NOT** select the "Squash and Merge" option.
+
+
+### Misc
+
+* *Be consistent.* This is related to the workflow but also expands to things
+  like commit messages, branch names and tags. Having a consistent style
+  throughout the repository makes it easy to understand what is going on by
+  looking at the log, a commit message etc.
+
+* *Test before you push.* Do not push half-done work.
+
+-------------------------------------------------------------------------------
 
 ## Branches
 
@@ -105,6 +219,8 @@ holds true that you should apply all of the above *before* pushing it.
   fixed ActiveModel::Errors deprecation messages failing when AR was used outside of Rails.
   ```
 
+  > [One reason for imperative present tense.](https://www.danclarke.com/git-tense)
+
 * After that should come a blank line followed by a more thorough
   description. It should be wrapped to *72 characters* and explain *why*
   the change is needed, *how* it addresses the issue and what *side-effects*
@@ -133,10 +249,10 @@ holds true that you should apply all of the above *before* pushing it.
 
   The pointers to your related resources can serve as a footer
   for your commit message. Here is an example that is referencing
-  Jira issues:
+  issues in a bug tracker:
 
-  Resolves: WEB-123, WEB-234
-  See also: WEB-345, WEB-456
+  Resolves: WEB-4, WEB-19
+  See also: WEB-66, WEB-89
 
   Source http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
   ```
@@ -206,9 +322,6 @@ Follow the same instructions as merging into `develop`, with the following excep
 
   - Merge `develop` into `master` using the "Merge Pull Request" option.
     **DO NOT** select the "Squash and Merge" option.
-
-> TODO: With our setup, should we be rebasing `master` into `develop` before
-  every merge?
 
 ## Misc.
 
